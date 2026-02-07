@@ -647,6 +647,31 @@
       cursor: pointer;
     }
 
+    /* Stack badge for card count */
+    .stack-badge {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 20;
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      letter-spacing: 1px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .cards-container.expanded .stack-badge {
+      opacity: 0;
+      transform: translateY(10px) scale(0.9);
+    }
+
     /* Stacked mode */
     .cards-container:not(.expanded) {
       height: 120px;
@@ -1746,6 +1771,14 @@
         const groupContent = document.createElement('div');
         groupContent.className = `cards-container ${isExpanded ? 'expanded' : ''}`;
         groupContent.onclick = () => toggleBankGroup(bankName);
+
+        // Add count badge if more than 1 card
+        if (groupCards.length > 1) {
+          const badge = document.createElement('div');
+          badge.className = 'stack-badge';
+          badge.innerText = `${groupCards.length} 張卡片`;
+          groupContent.appendChild(badge);
+        }
 
         groupCards.forEach(card => {
           const div = document.createElement('div');
