@@ -693,26 +693,26 @@
     /* Dynamic stacking offsets (up to 5 cards) */
     .cards-container:not(.expanded) .visual-card:nth-child(2) {
       transform: translateY(18px) scale(0.98);
-      /* 從 12px 增加 */
       z-index: 0;
-      opacity: 0.95;
-      filter: brightness(0.7) contrast(1.1);
+      opacity: 0.98;
+      filter: brightness(0.85) saturate(0.9);
+      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
     }
 
     .cards-container:not(.expanded) .visual-card:nth-child(3) {
       transform: translateY(36px) scale(0.96);
-      /* 從 24px 增加 */
       z-index: -1;
-      opacity: 0.9;
-      filter: brightness(0.5) contrast(1.1);
+      opacity: 0.95;
+      filter: brightness(0.7) saturate(0.8);
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
     }
 
     .cards-container:not(.expanded) .visual-card:nth-child(n+4) {
       transform: translateY(48px) scale(0.94);
-      /* 從 30px 增加 */
       z-index: -2;
-      opacity: 0.8;
-      filter: brightness(0.3) contrast(1.1);
+      opacity: 0.9;
+      filter: brightness(0.55) saturate(0.7);
+      box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
     }
 
     /* Expanded mode */
