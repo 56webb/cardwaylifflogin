@@ -642,42 +642,15 @@
 
     .cards-container {
       position: relative;
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
       margin-bottom: 20px;
       cursor: pointer;
     }
 
-    /* Stack badge for card count */
-    .stack-badge {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      background: rgba(0, 0, 0, 0.25);
-      backdrop-filter: blur(10px);
-      color: white;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 600;
-      z-index: 20;
-      pointer-events: none;
-      transition: opacity 0.4s ease, transform 0.4s ease;
-      letter-spacing: 1px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .cards-container.expanded .stack-badge {
-      opacity: 0;
-      transform: translateY(10px) scale(0.9);
-    }
-
-    /* Stacked mode */
+    /* Stacked mode - Premium Industry Style */
     .cards-container:not(.expanded) {
-      height: 140px;
-      /* 從 120px 增加 */
-      /* Partial height of first card */
-      margin-bottom: 60px;
+      height: 100px;
+      margin-bottom: 50px;
     }
 
     .cards-container:not(.expanded) .visual-card {
@@ -685,41 +658,37 @@
       top: 0;
       left: 0;
       width: 100%;
-      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      z-index: 1;
+      transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+      z-index: 10;
       margin-bottom: 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     }
 
-    /* Dynamic stacking offsets (up to 5 cards) */
+    /* Tight Elegant Stacking */
     .cards-container:not(.expanded) .visual-card:nth-child(2) {
-      transform: translateY(18px) scale(0.98);
-      z-index: 0;
-      opacity: 0.98;
-      filter: brightness(0.85) saturate(0.9);
-      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+      transform: translateY(8px) scale(0.985);
+      z-index: 9;
+      filter: brightness(0.92);
     }
 
     .cards-container:not(.expanded) .visual-card:nth-child(3) {
-      transform: translateY(36px) scale(0.96);
-      z-index: -1;
-      opacity: 0.95;
-      filter: brightness(0.7) saturate(0.8);
-      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+      transform: translateY(16px) scale(0.97);
+      z-index: 8;
+      filter: brightness(0.85);
     }
 
     .cards-container:not(.expanded) .visual-card:nth-child(n+4) {
-      transform: translateY(48px) scale(0.94);
-      z-index: -2;
-      opacity: 0.9;
-      filter: brightness(0.55) saturate(0.7);
-      box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
+      transform: translateY(22px) scale(0.95);
+      z-index: 7;
+      filter: brightness(0.78);
     }
 
     /* Expanded mode */
     .cards-container.expanded {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 12px;
     }
 
     .cards-container.expanded .visual-card {
@@ -727,6 +696,7 @@
       transform: none !important;
       opacity: 1 !important;
       z-index: 1 !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     }
 
     .bank-group-header .chevron {
@@ -1778,14 +1748,6 @@
         const groupContent = document.createElement('div');
         groupContent.className = `cards-container ${isExpanded ? 'expanded' : ''}`;
         groupContent.onclick = () => toggleBankGroup(bankName);
-
-        // Add count badge if more than 1 card
-        if (groupCards.length > 1) {
-          const badge = document.createElement('div');
-          badge.className = 'stack-badge';
-          badge.innerText = `${groupCards.length} 張卡片`;
-          groupContent.appendChild(badge);
-        }
 
         groupCards.forEach(card => {
           const div = document.createElement('div');
