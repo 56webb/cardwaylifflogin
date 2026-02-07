@@ -649,10 +649,8 @@
 
     /* Stacked mode - Premium Industry Style */
     .cards-container:not(.expanded) {
-      height: 80px;
-      /* 從 100px 下調 */
+      height: 90px;
       margin-bottom: 40px;
-      /* 從 50px 下調 */
     }
 
     .cards-container:not(.expanded) .visual-card {
@@ -856,7 +854,6 @@
     <!-- View 1: Home -->
     <div id="view-home" class="view active">
       <div class="ui-card" style="border:none; box-shadow:none; background:transparent; padding: 10px 0;">
-        <div style="font-size:10px; color:#D1D5DB; text-align:right;">Build: v1.0.3-LIVE</div>
         <h1 id="user-name">載入中...</h1>
         <p class="subtitle">歡迎回來！管理您的智慧錢包</p>
 
@@ -1744,7 +1741,8 @@
 
       Object.keys(groups).sort().forEach(bankName => {
         const groupCards = groups[bankName];
-        const isExpanded = expandedBanks.has(bankName) || isAllExpanded;
+        // 如果只有一張卡片，則預設為展開（不套用收合高度限制）
+        const isExpanded = groupCards.length === 1 || expandedBanks.has(bankName) || isAllExpanded;
 
         // Group Content
         const groupContent = document.createElement('div');
