@@ -148,12 +148,16 @@
     .visual-card {
       background: linear-gradient(135deg, #475569 0%, #1e293b 100%);
       color: white;
-      padding: 20px;
-      border-radius: 16px;
-      margin-bottom: 12px;
+      padding: 24px;
+      border-radius: 20px;
+      margin-bottom: 20px;
       position: relative;
       box-shadow: var(--shadow-md);
       overflow: hidden;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
 
     /* Dynamic gradients for cards */
@@ -181,38 +185,161 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 25px;
+      margin-bottom: auto;
     }
 
-    .vc-chip {
-      width: 36px;
-      height: 24px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 6px;
-      position: relative;
-    }
-
-    .vc-chip::after {
-      content: '';
-      position: absolute;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      width: 100%;
-      height: 50%;
-      top: 25%;
-      border-left: 0;
-      border-right: 0;
+    .vc-info-main {
+      margin-top: auto;
+      margin-bottom: auto;
+      display: flex;
+      flex-direction: column;
     }
 
     .vc-name {
-      font-size: 18px;
-      font-weight: 600;
+      font-size: 28px;
+      font-weight: 700;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      margin-bottom: 2px;
+      line-height: 1.2;
     }
 
     .vc-bank {
-      font-size: 12px;
-      opacity: 0.8;
-      letter-spacing: 1px;
+      font-size: 16px;
+      font-weight: 500;
+      opacity: 0.9;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .vc-settings-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      color: rgba(255, 255, 255, 0.8);
+      cursor: pointer;
+      padding: 8px;
+      z-index: 20;
+      transition: 0.3s;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .vc-settings-btn:hover {
+      background: rgba(0, 0, 0, 0.4);
+      transform: rotate(45deg);
+    }
+
+    .vc-logo {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      font-size: 44px;
+      opacity: 0.95;
+      filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
+    }
+
+    .vc-actions-menu {
+      position: absolute;
+      top: 55px;
+      right: 15px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+      display: none;
+      flex-direction: column;
+      z-index: 30;
+      overflow: hidden;
+      animation: menuFadeIn 0.2s ease-out;
+    }
+
+    @keyframes menuFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .vc-action-item {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-main);
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .vc-action-item:hover {
+      background: #F3F4F6;
+    }
+
+    .vc-action-item i {
+      width: 16px;
+    }
+
+    .vc-action-item.delete {
+      color: #EF4444;
+    }
+
+    /* Color Picker UI */
+    .color-picker-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 10000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .color-picker-content {
+      background: #fff;
+      padding: 24px;
+      border-radius: 24px;
+      width: 85%;
+      max-width: 320px;
+      text-align: center;
+    }
+
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .color-option {
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .color-option:hover {
+      transform: scale(1.15) rotate(5deg);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .color-option.active {
+      border-color: var(--primary);
+      transform: scale(1.1);
     }
 
     /* Search Bar */
@@ -474,6 +601,125 @@
       transform: translateX(-50%) translateY(0);
     }
 
+    /* Grouping and Toggle */
+    .bank-group-header {
+      display: none;
+      /* Removed header row as per user request */
+    }
+
+    .bank-group-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .bank-card-count {
+      background: #F3F4F6;
+      color: #6B7280;
+      font-size: 11px;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .toggle-all-btn {
+      color: var(--primary);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      padding: 4px 8px;
+      border-radius: 8px;
+      transition: 0.2s;
+    }
+
+    .toggle-all-btn:active {
+      background: rgba(6, 199, 85, 0.1);
+    }
+
+    .cards-container {
+      position: relative;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+
+    /* Stacked mode */
+    .cards-container:not(.expanded) {
+      height: 120px;
+      /* Partial height of first card */
+      margin-bottom: 60px;
+    }
+
+    .cards-container:not(.expanded) .visual-card {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 1;
+      margin-bottom: 0;
+    }
+
+    /* Dynamic stacking offsets (up to 5 cards) */
+    .cards-container:not(.expanded) .visual-card:nth-child(2) {
+      transform: translateY(12px) scale(0.98);
+      z-index: 0;
+      opacity: 0.9;
+    }
+
+    .cards-container:not(.expanded) .visual-card:nth-child(3) {
+      transform: translateY(24px) scale(0.96);
+      z-index: -1;
+      opacity: 0.8;
+    }
+
+    .cards-container:not(.expanded) .visual-card:nth-child(n+4) {
+      transform: translateY(30px) scale(0.94);
+      z-index: -2;
+      opacity: 0.6;
+    }
+
+    /* Expanded mode */
+    .cards-container.expanded {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .cards-container.expanded .visual-card {
+      position: relative;
+      transform: none !important;
+      opacity: 1 !important;
+      z-index: 1 !important;
+    }
+
+    .bank-group-header .chevron {
+      transition: transform 0.3s;
+      color: #D1D5DB;
+      font-size: 12px;
+    }
+
+    .bank-group-header.expanded .chevron {
+      transform: rotate(90deg);
+      color: var(--text-main);
+    }
+
+    .header-action-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 25px;
+      margin-bottom: 15px;
+    }
+
+    .header-action-row h2 {
+      margin: 0;
+    }
+
     /* Modal */
     #custom-modal {
       position: fixed;
@@ -563,8 +809,8 @@
     /* Two-column wallet grid */
     .wallet-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      grid-template-columns: 1fr;
+      gap: 20px;
     }
 
     .wallet-grid .visual-card {
@@ -610,11 +856,11 @@
         <p class="subtitle">歡迎回來！管理您的智慧錢包</p>
 
         <div class="stat-grid">
-          <div class="stat-item">
+          <div class="stat-item" onclick="switchView('view-cards')" style="cursor:pointer;">
             <div class="stat-val" id="count-cards">0</div>
             <div class="stat-lbl">持有卡片</div>
           </div>
-          <div class="stat-item">
+          <div class="stat-item" onclick="switchView('view-payments')" style="cursor:pointer;">
             <div class="stat-val" id="count-pay">0</div>
             <div class="stat-lbl">支付綁定</div>
           </div>
@@ -839,6 +1085,21 @@
     </div>
   </div>
 
+  <!-- Color Picker Modal -->
+  <div id="color-picker-modal" class="color-picker-overlay" onclick="closeColorPicker(event)">
+    <div class="color-picker-content" onclick="event.stopPropagation()">
+      <h3 style="margin-bottom: 8px;">更換卡片顏色</h3>
+      <p style="font-size: 13px; color: var(--text-sub); margin-bottom: 16px;">挑選最適合這張卡片的底色</p>
+      <div class="color-grid" id="color-grid">
+        <!-- Colors will be rendered here -->
+      </div>
+      <button class="primary-btn" onclick="resetCardColor()"
+        style="margin-top: 20px; background: #9CA3AF; box-shadow: none; padding: 12px; font-size: 14px;">回復預設漸層</button>
+      <button class="primary-btn" onclick="closeColorPicker()"
+        style="margin-top: 8px; background: #6B7280; box-shadow: none; padding: 12px; font-size: 14px;">關閉</button>
+    </div>
+  </div>
+
   <script>
     // Config
     const LIFF_ID = "2008834693-FtenJAlU";
@@ -853,7 +1114,7 @@
     }
 
     // Auto-detect Mock Mode only for localhost or debugging
-    const IS_MOCK = location.hostname === "localhost" || location.hostname.includes("127.0.0.1");
+    const IS_MOCK = location.hostname === "localhost" || location.hostname.includes("127.0.0.1") || location.protocol === "file:";
 
     // Data (Same DB)
     const CARD_DB = {
@@ -1243,6 +1504,12 @@
 
       // Re-render specifics
       if (viewId === 'view-home') updateHomeStats();
+      if (viewId === 'view-cards') {
+        selectedBank = null;
+        document.getElementById('bank-search').value = '';
+        renderBanks();
+        renderCards(null);
+      }
       if (viewId === 'view-payments') renderPaymentSetup();
       if (viewId === 'view-settings') renderSettingsView();
     }
@@ -1282,11 +1549,12 @@
       const container = document.getElementById('card-list');
       container.innerHTML = '';
 
-      const cards = CARD_DB[bank] || [];
-      if (cards.length === 0) {
-        container.innerHTML = `<div style="text-align:center; color:#9CA3AF; padding:20px;">無卡片資料</div>`;
+      if (!bank || !CARD_DB[bank] || CARD_DB[bank].length === 0) {
+        container.innerHTML = `<div style="text-align:center; color:#9CA3AF; padding:20px;">請先挑選發卡銀行</div>`;
         return;
       }
+
+      const cards = CARD_DB[bank];
 
       // 判斷是否為特殊卡組織（不顯示選擇器）
       const isSpecialOrg = bank.includes('美國運通') || bank.includes('樂天');
@@ -1299,7 +1567,7 @@
 
         const existingCard = myWallet.find(c => c.name === cardName && c.bank === bank);
         const isSelected = !!existingCard;
-        const currentOrg = existingCard?.org || 'visa';
+        const currentOrg = existingCard?.org || '';
 
         // Card info row
         const infoRow = document.createElement('div');
@@ -1314,7 +1582,7 @@
         const btn = document.createElement('button');
         btn.className = `action-btn ${isSelected ? 'remove-icon' : 'add-icon'}`;
         btn.innerHTML = isSelected ? '<i class="fas fa-minus"></i>' : '<i class="fas fa-plus"></i>';
-        btn.onclick = () => toggleCard(bank, cardName, 'visa');
+        btn.onclick = () => toggleCard(bank, cardName, '');
 
         infoRow.appendChild(btn);
         item.appendChild(infoRow);
@@ -1324,13 +1592,14 @@
           const orgSelector = document.createElement('div');
           orgSelector.className = 'card-org-selector';
 
-          ['visa', 'mastercard', 'jcb'].forEach(org => {
+          ['na', 'visa', 'mastercard', 'jcb'].forEach(org => { // na means N/A
             const orgBtn = document.createElement('button');
-            orgBtn.className = `org-btn ${currentOrg === org ? 'active' : ''}`;
-            orgBtn.innerText = org.toUpperCase();
+            const isActive = (org === 'na' && !currentOrg) || (currentOrg === org);
+            orgBtn.className = `org-btn ${isActive ? 'active' : ''}`;
+            orgBtn.innerText = org === 'na' ? 'N/A' : org.toUpperCase();
             orgBtn.onclick = (e) => {
               e.stopPropagation();
-              updateCardOrg(bank, cardName, org);
+              updateCardOrg(bank, cardName, org === 'na' ? '' : org);
             };
             orgSelector.appendChild(orgBtn);
           });
@@ -1351,7 +1620,7 @@
       }
     }
 
-    function toggleCard(bank, name, org = 'visa') {
+    function toggleCard(bank, name, org = '') {
       const idx = myWallet.findIndex(c => c.name === name);
       if (idx > -1) {
         myWallet.splice(idx, 1);
@@ -1424,6 +1693,10 @@
     }
 
     // Home & Visuals
+    // State for collapsing
+    let expandedBanks = new Set();
+    let isAllExpanded = false;
+
     function updateHomeStats() {
       // Numbers
       document.getElementById('count-cards').innerText = myWallet.length;
@@ -1443,31 +1716,243 @@
         return;
       }
 
-      // Create two-column grid container
+      // Group cards by bank
+      const groups = {};
+      myWallet.forEach(card => {
+        if (!groups[card.bank]) groups[card.bank] = [];
+        groups[card.bank].push(card);
+      });
+
+      // Header row with Expand All
+      const headerRow = document.createElement('div');
+      headerRow.className = 'header-action-row';
+      headerRow.innerHTML = `
+        <h2 class="section-title">我的卡片</h2>
+        <div class="toggle-all-btn" onclick="toggleAllGroups()">
+          ${isAllExpanded ? '收合全部' : '展開全部'}
+        </div>
+      `;
+      preview.appendChild(headerRow);
+
       const gridContainer = document.createElement('div');
       gridContainer.className = 'wallet-grid';
 
-      myWallet.forEach(card => {
-        const div = document.createElement('div');
-        div.className = 'visual-card';
-        div.setAttribute('data-bank', card.bank);
+      Object.keys(groups).sort().forEach(bankName => {
+        const groupCards = groups[bankName];
+        const isExpanded = expandedBanks.has(bankName) || isAllExpanded;
 
-        const cardOrg = card.org || 'visa';
-        const orgIcon = cardOrg === 'mastercard' ? 'fa-cc-mastercard' :
-          cardOrg === 'jcb' ? 'fa-cc-jcb' : 'fa-cc-visa';
+        // Group Content
+        const groupContent = document.createElement('div');
+        groupContent.className = `cards-container ${isExpanded ? 'expanded' : ''}`;
+        groupContent.onclick = () => toggleBankGroup(bankName);
 
-        div.innerHTML = `
-                <div class="vc-top">
-                    <div class="vc-chip"></div>
-                    <i class="fab ${orgIcon}" style="font-size:24px; opacity:0.8;"></i>
-                </div>
-                <div class="vc-name">${card.name}</div>
-                <div class="vc-bank">${card.bank.split(" ")[1] || card.bank}</div>
-              `;
-        gridContainer.appendChild(div);
+        groupCards.forEach(card => {
+          const div = document.createElement('div');
+          div.className = 'visual-card';
+          div.setAttribute('data-bank', card.bank);
+
+          if (card.color) {
+            div.style.background = card.color;
+          }
+
+          const cardOrg = card.org;
+          let orgIconHtml = '';
+          if (cardOrg) {
+            const orgIcon = cardOrg === 'mastercard' ? 'fa-cc-mastercard' :
+              cardOrg === 'jcb' ? 'fa-cc-jcb' : 'fa-cc-visa';
+            orgIconHtml = `<i class="fab ${orgIcon} vc-logo"></i>`;
+          }
+
+          div.innerHTML = `
+                  <div class="vc-settings-btn" onclick="toggleCardActions(event, '${card.name}-${card.bank}')">
+                      <i class="fas fa-cog"></i>
+                  </div>
+                  <div class="vc-actions-menu" id="actions-${card.name}-${card.bank}">
+                      <div class="vc-action-item" onclick="openColorPicker('${card.name}', '${card.bank}')">
+                          <i class="fas fa-palette"></i> 換色
+                      </div>
+                      <div class="vc-action-item delete" onclick="removeCardFromHome('${card.name}', '${card.bank}')">
+                          <i class="fas fa-trash-alt"></i> 移除
+                      </div>
+                  </div>
+                  <div class="vc-top">
+                      <div class="vc-bank">${card.bank.split(" ")[1] || card.bank}</div>
+                  </div>
+                  <div class="vc-info-main">
+                      <div class="vc-name">${card.name}</div>
+                  </div>
+                  ${orgIconHtml}
+                `;
+          groupContent.appendChild(div);
+        });
+        gridContainer.appendChild(groupContent);
       });
 
       preview.appendChild(gridContainer);
+    }
+
+    function toggleBankGroup(bankName) {
+      if (expandedBanks.has(bankName)) {
+        expandedBanks.delete(bankName);
+        isAllExpanded = false;
+      } else {
+        expandedBanks.add(bankName);
+      }
+      updateHomeStats();
+    }
+
+    function toggleAllGroups() {
+      isAllExpanded = !isAllExpanded;
+      if (!isAllExpanded) {
+        expandedBanks.clear();
+      }
+      updateHomeStats();
+    }
+
+    function toggleAllGroups() {
+      isAllExpanded = !isAllExpanded;
+      if (!isAllExpanded) {
+        expandedBanks.clear();
+      }
+      updateHomeStats();
+    }
+
+    function removeCardFromHome(name, bank) {
+      if (!confirm('確定要移除這張 ' + name + ' 嗎？')) return;
+
+      const idx = myWallet.findIndex(c => c.name === name && c.bank === bank);
+      if (idx > -1) {
+        myWallet.splice(idx, 1);
+        Object.keys(payMap).forEach(key => {
+          payMap[key] = payMap[key].filter(n => n !== name);
+        });
+        userProfile.mainCards = userProfile.mainCards.filter(n => n !== name);
+
+        updateHomeStats();
+        updateCartCount();
+        showToast("已移除卡片");
+
+        if (IS_MOCK) {
+          localStorage.setItem('cardway_data_v2', JSON.stringify({ myWallet, payMap, profile: userProfile }));
+        }
+      }
+    }
+
+    function toggleCardActions(e, id) {
+      e.stopPropagation();
+      // Close other menus first
+      document.querySelectorAll('.vc-actions-menu').forEach(m => {
+        if (m.id !== 'actions-' + id) m.style.display = 'none';
+      });
+
+      const menu = document.getElementById('actions-' + id);
+      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+
+      // Global click to close
+      if (menu.style.display === 'flex') {
+        setTimeout(() => {
+          window.onclick = () => {
+            menu.style.display = 'none';
+            window.onclick = null;
+          };
+        }, 0);
+      }
+    }
+
+    // Color Picker Logic
+    let activeEditCard = null;
+    const PRESET_COLORS = [
+      'linear-gradient(135deg, #2D3436 0%, #000000 100%)', // Midnight Black
+      'linear-gradient(135deg, #434343 0%, #000000 100%)', // Onyx
+      'linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)', // Deep Ocean
+      'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)', // Cobalt
+      'linear-gradient(135deg, #00b09b 0%, #96c93d 100%)', // Nature Emerald
+      'linear-gradient(135deg, #0093E9 0%, #80D0C7 100%)', // Tropical Aqua
+      'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)', // Soft Sakura
+      'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)', // Warm Flame
+      'linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)', // Lavender Dream
+      'linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%)', // Vivid Purple
+      'linear-gradient(135deg, #f83600 0%, #f9d423 100%)', // Sunrise
+      'linear-gradient(135deg, #ee0979 0%, #ff6a00 100%)', // Passion
+      'linear-gradient(135deg, #d31027 0%, #ea384d 100%)', // Crimson
+      'linear-gradient(135deg, #1d976c 0%, #93f9b9 100%)', // Fresh Mint
+      'linear-gradient(145deg, #e6e9f0 0%, #eef1f5 100%)', // Silver Spark
+      'linear-gradient(135deg, #616161 0%, #9bc5c3 100%)'  // Modern Slate
+    ];
+
+    function openColorPicker(name, bank) {
+      activeEditCard = { name, bank };
+      const modal = document.getElementById('color-picker-modal');
+      const grid = document.getElementById('color-grid');
+      grid.innerHTML = '';
+
+      PRESET_COLORS.forEach(color => {
+        const opt = document.createElement('div');
+        opt.className = 'color-option';
+        opt.style.background = color;
+        opt.onclick = () => selectCardColor(color);
+        grid.appendChild(opt);
+      });
+
+      modal.style.display = 'flex';
+    }
+
+    function closeColorPicker(e) {
+      document.getElementById('color-picker-modal').style.display = 'none';
+    }
+
+    function selectCardColor(color) {
+      if (!activeEditCard) return;
+      const card = myWallet.find(c => c.name === activeEditCard.name && c.bank === activeEditCard.bank);
+      if (card) {
+        card.color = color;
+        updateHomeStats();
+        silentlySave();
+        closeColorPicker();
+      }
+    }
+
+    function resetCardColor() {
+      if (!activeEditCard) return;
+      const card = myWallet.find(c => c.name === activeEditCard.name && c.bank === activeEditCard.bank);
+      if (card) {
+        delete card.color;
+        updateHomeStats();
+        silentlySave();
+        closeColorPicker();
+      }
+    }
+
+    function silentlySave() {
+      if (IS_MOCK) {
+        localStorage.setItem('cardway_data_v2', JSON.stringify({ myWallet, payMap, profile: userProfile }));
+        return;
+      }
+      // Trigger update via saveAll(false) or separate call
+      // Because saveAll has UI loading, we might need a silent version
+      saveAllSilent();
+    }
+
+    async function saveAllSilent() {
+      try {
+        const idToken = liff.getIDToken();
+        const decoded = liff.getDecodedIDToken();
+        const userId = decoded ? decoded.sub : null;
+        if (!userId) return;
+
+        await fetch(GAS_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: "save_settings",
+            idToken,
+            userId,
+            myWallet,
+            payMap,
+            profile: userProfile
+          })
+        });
+      } catch (e) { console.error("Silent Save Failed", e); }
     }
 
     function finishSave(btn, oldText) {
