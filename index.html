@@ -375,6 +375,69 @@
       border-color: var(--primary);
     }
 
+
+    /* --- Page Layout & Transitions (Missing Restored) --- */
+
+    /* Views */
+    .view {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease-out;
+      padding-bottom: 80px;
+    }
+
+    .view.active {
+      display: block;
+      opacity: 1;
+      animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding: 4px 0;
+    }
+
+    .h-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .h-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-icon {
+      font-size: 20px;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 0;
+    }
+
     /* --- Restored & Upgraded UI Components (Apple Style) --- */
 
     /* Search Bar */
